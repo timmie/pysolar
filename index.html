@@ -6,8 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Indices and tables &mdash; Pysolar v0.4.1 documentation</title>
-    <link rel="stylesheet" href="static/default.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
@@ -17,8 +17,8 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="static/jquery.js"></script>
-    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Pysolar v0.4.1 documentation" href="#" /> 
   </head>
   <body>
@@ -55,21 +55,56 @@
 <p>The core functions are in solar.py.</p>
 <div class="section" id="module-constants">
 <h2>constants.py<a class="headerlink" href="#module-constants" title="Permalink to this headline">¶</a></h2>
-<p>Constants as input for ephemeris calculations</p>
+<p>This file is consists of numerical constants for calculating corrections,
+such as the wiggling (&#8220;nutation&#8221;) of the axis of the earth. It also includes
+functions for building dictionaries of polynomial functions for rapid
+calculation of corrections.</p>
+<p>Most of the constants come from a 2005 paper by Reda and Andreas:</p>
+<p>I. Reda and A. Andreas, &#8220;Solar Position Algorithm for Solar Radiation
+Applications,&#8221; National Renewable Energy Laboratory, NREL/TP-560-34302,
+revised November 2005.</p>
+<p><a class="reference external" href="http://www.osti.gov/bridge/servlets/purl/15003974-iP3z6k/native/15003974.PDF">http://www.osti.gov/bridge/servlets/purl/15003974-iP3z6k/native/15003974.PDF</a></p>
+<p>However, it seems that Reda and Andreas took the bulk of the constants
+(L0, etc.) from Pierre Bretagnon and Gerard Francou&#8217;s Variations Seculaires
+des Orbites Planetaires, or VSOP87:</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Secular_variations_of_the_planetary_orbits#VSOP87">http://en.wikipedia.org/wiki/Secular_variations_of_the_planetary_orbits#VSOP87</a></p>
+<p>See also <a class="reference external" href="ftp://ftp.imcce.fr/pub/ephem/planets/vsop87/VSOP87D.ear">ftp://ftp.imcce.fr/pub/ephem/planets/vsop87/VSOP87D.ear</a></p>
+<dl class="function">
+<dt id="constants.buildPolyDict">
+<tt class="descclassname">constants.</tt><tt class="descname">buildPolyDict</tt><big>(</big><big>)</big><a class="headerlink" href="#constants.buildPolyDict" title="Permalink to this definition">¶</a></dt>
+<dd>This function builds a dictionary of polynomial functions from a list of
+coefficients, so that the functions can be called by name. This is used in
+calculating nutation.</dd></dl>
+
 </div>
 <div class="section" id="module-horizon">
 <h2>horizon.py<a class="headerlink" href="#module-horizon" title="Permalink to this headline">¶</a></h2>
-<p>Script for detecting angle to solar obstructions from spherically distorted images</p>
+<p>This script rectifies spherically distorted images in order to detect the
+angle to solar obstructions. It is not used in Pysolar&#8217;s ephemeris
+calculations.</p>
+<p>An example of this script in action appears here:</p>
+<p><a class="reference external" href="http://pingswept.org/2009/03/16/calculating-solar-panel-shading-in-python/">http://pingswept.org/2009/03/16/calculating-solar-panel-shading-in-python/</a></p>
 </div>
 <div class="section" id="module-julian">
 <h2>julian.py<a class="headerlink" href="#module-julian" title="Permalink to this headline">¶</a></h2>
-<p>Julian calendar calculations for calculating the position of the sun relative to the earth</p>
+<p>This file contains all the functions related to the Julian calendar, which
+are used in calculating the position of the sun relative to the earth</p>
+<dl class="function">
+<dt id="julian.GetJulianDay">
+<tt class="descclassname">julian.</tt><tt class="descname">GetJulianDay</tt><big>(</big><em>utc_datetime</em><big>)</big><a class="headerlink" href="#julian.GetJulianDay" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is based on NREL/TP-560-34302 by Andreas and Reda</p>
+<p>This function does not accept years before 0 because of the bounds check
+on Python&#8217;s datetime.year field.</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="julian.GetJulianEphemerisDay">
 <tt class="descclassname">julian.</tt><tt class="descname">GetJulianEphemerisDay</tt><big>(</big><em>julian_day</em>, <em>delta_seconds=66.0</em><big>)</big><a class="headerlink" href="#julian.GetJulianEphemerisDay" title="Permalink to this definition">¶</a></dt>
-<dd>delta_seconds is value referred to by astronomers as Delta-T, defined as the difference between
+<dd><p>delta_seconds is the value referred to by astronomers as Delta-T, defined as the difference between
 Dynamical Time (TD) and Universal Time (UT). In 2007, it&#8217;s around 65 seconds.
-A list of values for Delta-T can be found here: <a class="reference external" href="ftp://maia.usno.navy.mil/ser7/deltat.data">ftp://maia.usno.navy.mil/ser7/deltat.data</a></dd></dl>
+A list of values for Delta-T can be found here: <a class="reference external" href="ftp://maia.usno.navy.mil/ser7/deltat.data">ftp://maia.usno.navy.mil/ser7/deltat.data</a></p>
+<p>More details: <a class="reference external" href="http://en.wikipedia.org/wiki/DeltaT">http://en.wikipedia.org/wiki/DeltaT</a></p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-poly">
@@ -971,7 +1006,7 @@ Design of Buildings&#8221;</td></tr>
 
             <h3>This Page</h3>
             <ul class="this-page-menu">
-              <li><a href="sources/index.txt"
+              <li><a href="_sources/index.txt"
                      rel="nofollow">Show Source</a></li>
             </ul>
           <div id="searchbox" style="display: none">
@@ -1005,7 +1040,7 @@ Design of Buildings&#8221;</td></tr>
     </div>
     <div class="footer">
       &copy; Copyright 2008-2010, Brandon Stafford.
-      Last updated on Mar 03, 2010.
+      Last updated on Mar 09, 2010.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
     </div>
   </body>

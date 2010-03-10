@@ -22,8 +22,10 @@ query_usno.EncodeRequest function index.html
 util.GetSunriseTime function index.html
 util.mean_earth_sun_distance function index.html
 util.declination_degree function index.html
+constants.buildPolyDict function index.html
 simulate.SimulateSpan function index.html
 util.clear_index function index.html
+julian.GetJulianDay function index.html
 solar.GetDeclination function index.html
 util.GetSunsetTime function index.html
 util.solarelevation_function_overcast function index.html
